@@ -19,6 +19,7 @@ public interface MyApis {
 
     /**
      * 获取最新版本信息
+     *
      * @return
      */
     @GET("version")

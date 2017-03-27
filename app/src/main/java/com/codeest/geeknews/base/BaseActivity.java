@@ -22,7 +22,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  * Created by codeest on 2016/8/2.
  * MVP activity基类
  */
-public abstract class BaseActivity<T extends BasePresenter> extends SupportActivity implements BaseView{
+public abstract class BaseActivity<T extends BasePresenter> extends SupportActivity implements BaseView {
 
     @Inject
     protected T mPresenter;
@@ -60,14 +60,14 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         });
     }
 
-    protected ActivityComponent getActivityComponent(){
-        return  DaggerActivityComponent.builder()
+    protected ActivityComponent getActivityComponent() {
+        return DaggerActivityComponent.builder()
                 .appComponent(App.getAppComponent())
                 .activityModule(getActivityModule())
                 .build();
     }
 
-    protected ActivityModule getActivityModule(){
+    protected ActivityModule getActivityModule() {
         return new ActivityModule(this);
     }
 
@@ -93,6 +93,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
     }
 
     protected abstract void initInject();
+
     protected abstract int getLayout();
+
     protected abstract void initEventAndData();
 }

@@ -168,7 +168,7 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    GankApis provideGankService(@GankUrl  Retrofit retrofit) {
+    GankApis provideGankService(@GankUrl Retrofit retrofit) {
         return retrofit.create(GankApis.class);
     }
 
