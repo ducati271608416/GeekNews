@@ -31,8 +31,8 @@ public class RealmHelper {
 
     /**
      * 增加 阅读记录
-     * @param id
-     * 使用@PrimaryKey注解后copyToRealm需要替换为copyToRealmOrUpdate
+     *
+     * @param id 使用@PrimaryKey注解后copyToRealm需要替换为copyToRealmOrUpdate
      */
     public void insertNewsId(int id) {
         ReadStateBean bean = new ReadStateBean();
@@ -44,13 +44,14 @@ public class RealmHelper {
 
     /**
      * 查询 阅读记录
+     *
      * @param id
      * @return
      */
     public boolean queryNewsId(int id) {
         RealmResults<ReadStateBean> results = mRealm.where(ReadStateBean.class).findAll();
-        for(ReadStateBean item : results) {
-            if(item.getId() == id) {
+        for (ReadStateBean item : results) {
+            if (item.getId() == id) {
                 return true;
             }
         }
@@ -59,6 +60,7 @@ public class RealmHelper {
 
     /**
      * 增加 收藏记录
+     *
      * @param bean
      */
     public void insertLikeBean(RealmLikeBean bean) {
@@ -69,10 +71,11 @@ public class RealmHelper {
 
     /**
      * 删除 收藏记录
+     *
      * @param id
      */
     public void deleteLikeBean(String id) {
-        RealmLikeBean data = mRealm.where(RealmLikeBean.class).equalTo("id",id).findFirst();
+        RealmLikeBean data = mRealm.where(RealmLikeBean.class).equalTo("id", id).findFirst();
         mRealm.beginTransaction();
         if (data != null) {
             data.deleteFromRealm();
@@ -82,13 +85,14 @@ public class RealmHelper {
 
     /**
      * 查询 收藏记录
+     *
      * @param id
      * @return
      */
     public boolean queryLikeId(String id) {
         RealmResults<RealmLikeBean> results = mRealm.where(RealmLikeBean.class).findAll();
-        for(RealmLikeBean item : results) {
-            if(item.getId().equals(id)) {
+        for (RealmLikeBean item : results) {
+            if (item.getId().equals(id)) {
                 return true;
             }
         }
@@ -103,11 +107,12 @@ public class RealmHelper {
 
     /**
      * 修改 收藏记录 时间戳以重新排序
+     *
      * @param id
      * @param time
      * @param isPlus
      */
-    public void changeLikeTime(String id ,long time, boolean isPlus) {
+    public void changeLikeTime(String id, long time, boolean isPlus) {
         RealmLikeBean bean = mRealm.where(RealmLikeBean.class).equalTo("id", id).findFirst();
         mRealm.beginTransaction();
         if (isPlus) {
@@ -120,6 +125,7 @@ public class RealmHelper {
 
     /**
      * 更新 掘金首页管理列表
+     *
      * @param bean
      */
     public void updateGoldManagerList(GoldManagerBean bean) {
@@ -134,6 +140,7 @@ public class RealmHelper {
 
     /**
      * 获取 掘金首页管理列表
+     *
      * @return
      */
     public GoldManagerBean getGoldManagerList() {

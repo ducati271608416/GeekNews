@@ -19,6 +19,7 @@ public class RxUtil {
 
     /**
      * 统一线程处理
+     *
      * @param <T>
      * @return
      */
@@ -34,6 +35,7 @@ public class RxUtil {
 
     /**
      * 统一返回结果处理
+     *
      * @param <T>
      * @return
      */
@@ -44,7 +46,7 @@ public class RxUtil {
                 return httpResponseObservable.flatMap(new Func1<GankHttpResponse<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(GankHttpResponse<T> tGankHttpResponse) {
-                        if(!tGankHttpResponse.getError()) {
+                        if (!tGankHttpResponse.getError()) {
                             return createData(tGankHttpResponse.getResults());
                         } else {
                             return Observable.error(new ApiException("服务器返回error"));
@@ -57,6 +59,7 @@ public class RxUtil {
 
     /**
      * 统一返回结果处理
+     *
      * @param <T>
      * @return
      */
@@ -67,7 +70,7 @@ public class RxUtil {
                 return httpResponseObservable.flatMap(new Func1<WXHttpResponse<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(WXHttpResponse<T> tWXHttpResponse) {
-                        if(tWXHttpResponse.getCode() == 200) {
+                        if (tWXHttpResponse.getCode() == 200) {
                             return createData(tWXHttpResponse.getNewslist());
                         } else {
                             return Observable.error(new ApiException("服务器返回error"));
@@ -80,6 +83,7 @@ public class RxUtil {
 
     /**
      * 统一返回结果处理
+     *
      * @param <T>
      * @return
      */
@@ -90,7 +94,7 @@ public class RxUtil {
                 return httpResponseObservable.flatMap(new Func1<MyHttpResponse<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(MyHttpResponse<T> tMyHttpResponse) {
-                        if(tMyHttpResponse.getCode() == 200) {
+                        if (tMyHttpResponse.getCode() == 200) {
                             return createData(tMyHttpResponse.getData());
                         } else {
                             return Observable.error(new ApiException("服务器返回error"));
@@ -103,6 +107,7 @@ public class RxUtil {
 
     /**
      * 统一返回结果处理
+     *
      * @param <T>
      * @return
      */
@@ -113,7 +118,7 @@ public class RxUtil {
                 return httpResponseObservable.flatMap(new Func1<GoldHttpResponse<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(GoldHttpResponse<T> tGoldHttpResponse) {
-                        if(tGoldHttpResponse.getResults() != null) {
+                        if (tGoldHttpResponse.getResults() != null) {
                             return createData(tGoldHttpResponse.getResults());
                         } else {
                             return Observable.error(new ApiException("服务器返回error"));
@@ -126,6 +131,7 @@ public class RxUtil {
 
     /**
      * 生成Observable
+     *
      * @param <T>
      * @return
      */

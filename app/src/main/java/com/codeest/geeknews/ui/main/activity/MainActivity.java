@@ -43,7 +43,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by codeest on 16/8/9.
  */
 
-public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View{
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
     @BindView(R.id.drawer)
     DrawerLayout mDrawerLayout;
@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     /**
      * 由于recreate 需要特殊处理夜间模式
+     *
      * @param savedInstanceState
      */
     @Override
@@ -101,7 +102,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData() {
-        setToolBar(mToolbar,"知乎日报");
+        setToolBar(mToolbar, "知乎日报");
         mZhihuFragment = new ZhihuMainFragment();
         mGankFragment = new GankMainFragment();
         mWechatFragment = new WechatMainFragment();
@@ -114,7 +115,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_zhihu);
-        loadMultipleRootFragment(R.id.fl_main_content,0,mZhihuFragment,mWechatFragment,mGankFragment,mGoldFragment,mVtexFragment,mLikeFragment,mSettingFragment,mAboutFragment);
+        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuFragment, mWechatFragment, mGankFragment, mGoldFragment, mVtexFragment, mLikeFragment, mSettingFragment, mAboutFragment);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -152,7 +153,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         mSearchMenuItem.setVisible(false);
                         break;
                 }
-                if(mLastMenuItem != null) {
+                if (mLastMenuItem != null) {
                     mLastMenuItem.setChecked(false);
                 }
                 mLastMenuItem = menuItem;
@@ -168,9 +169,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(showFragment == Constants.TYPE_GANK) {
+                if (showFragment == Constants.TYPE_GANK) {
                     mGankFragment.doSearch(query);
-                } else if(showFragment == Constants.TYPE_WECHAT) {
+                } else if (showFragment == Constants.TYPE_WECHAT) {
                     RxBus.getDefault().post(new SearchEvent(query, Constants.TYPE_WECHAT));
                 }
                 return false;
@@ -206,7 +207,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showError(String msg) {
-        SnackbarUtil.showShort(mToolbar,msg);
+        SnackbarUtil.showShort(mToolbar, msg);
     }
 
     @Override

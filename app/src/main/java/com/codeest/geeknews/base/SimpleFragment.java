@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
+
 /**
  * Created by codeest on 16/8/11.
  * 无MVP的Fragment基类
@@ -72,5 +73,6 @@ public abstract class SimpleFragment extends SupportFragment {
     }
 
     protected abstract int getLayoutId();
+
     protected abstract void initEventAndData();
 }

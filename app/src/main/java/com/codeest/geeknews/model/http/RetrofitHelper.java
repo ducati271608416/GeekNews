@@ -117,8 +117,8 @@ public class RetrofitHelper {
         return mGankApiService.getRandomGirl(num);
     }
 
-    public Observable<GankHttpResponse<List<GankSearchItemBean>>> fetchGankSearchList(String query,String type,int num,int page) {
-        return mGankApiService.getSearchList(query,type,num,page);
+    public Observable<GankHttpResponse<List<GankSearchItemBean>>> fetchGankSearchList(String query, String type, int num, int page) {
+        return mGankApiService.getSearchList(query, type, num, page);
     }
 
     public Observable<WXHttpResponse<List<WXItemBean>>> fetchWechatListInfo(int num, int page) {
@@ -156,7 +156,7 @@ public class RetrofitHelper {
         return mVtexApiService.getTopicInfo(id);
     }
 
-    public Observable<List<RepliesListBean>> fetchRepliesList(String id){
+    public Observable<List<RepliesListBean>> fetchRepliesList(String id) {
         return mVtexApiService.getRepliesList(id);
     }
 }

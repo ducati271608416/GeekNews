@@ -34,7 +34,7 @@ import butterknife.OnClick;
  * Created by codeest on 16/8/23.
  */
 
-public class SettingFragment extends BaseFragment<SettingPresenter> implements CompoundButton.OnCheckedChangeListener, SettingContract.View{
+public class SettingFragment extends BaseFragment<SettingPresenter> implements CompoundButton.OnCheckedChangeListener, SettingContract.View {
 
     @BindView(R.id.cb_setting_cache)
     AppCompatCheckBox cbSettingCache;
@@ -81,7 +81,7 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
             PackageManager pm = getActivity().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(getActivity().getPackageName(), PackageManager.GET_ACTIVITIES);
             versionName = pi.versionName;
-            tvSettingUpdate.setText(String.format("当前版本号 v%s",versionName));
+            tvSettingUpdate.setText(String.format("当前版本号 v%s", versionName));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -138,7 +138,7 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements C
         content.append(bean.getSize());
         content.append("\r\n");
         content.append("更新内容:\r\n");
-        content.append(bean.getDes().replace("\\r\\n","\r\n"));
+        content.append(bean.getDes().replace("\\r\\n", "\r\n"));
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(mContext);
         builder.setTitle("检测到新版本!");
         builder.setMessage(content);

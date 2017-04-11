@@ -15,7 +15,7 @@ public interface DailyContract {
 
         void showContent(DailyListBean info);
 
-        void showMoreContent(String date,DailyBeforeListBean info);
+        void showMoreContent(String date, DailyBeforeListBean info);
 
         void doInterval(int currentCount);
     }

@@ -23,7 +23,7 @@ import rx.functions.Func1;
  * Created by codeest on 16/8/9.
  */
 
-public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter{
+public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter {
 
     private RetrofitHelper mRetrofitHelper;
 
@@ -72,7 +72,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                         content.append(bean.getSize());
                         content.append("\r\n");
                         content.append("更新内容:\r\n");
-                        content.append(bean.getDes().replace("\\r\\n","\r\n"));
+                        content.append(bean.getDes().replace("\\r\\n", "\r\n"));
                         return content.toString();
                     }
                 })

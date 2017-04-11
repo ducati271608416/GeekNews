@@ -30,7 +30,7 @@ import rx.schedulers.Schedulers;
  * 其他日期，取before接口的数据
  */
 
-public class DailyPresenter extends RxPresenter<DailyContract.View> implements DailyContract.Presenter{
+public class DailyPresenter extends RxPresenter<DailyContract.View> implements DailyContract.Presenter {
 
     private RetrofitHelper mRetrofitHelper;
     private RealmHelper mRealmHelper;
@@ -42,7 +42,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
     private int currentTopCount = 0;
 
     @Inject
-    public DailyPresenter(RetrofitHelper mRetrofitHelper,RealmHelper mRealHelper) {
+    public DailyPresenter(RetrofitHelper mRetrofitHelper, RealmHelper mRealHelper) {
         this.mRetrofitHelper = mRetrofitHelper;
         this.mRealmHelper = mRealHelper;
         registerEvent();
@@ -58,10 +58,10 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                         String year = String.valueOf(calendarDay.getYear());
                         String month = String.valueOf(calendarDay.getMonth() + 1);
                         String day = String.valueOf(calendarDay.getDay() + 1);
-                        if(month.length() < 2) {
+                        if (month.length() < 2) {
                             month = "0" + month;
                         }
-                        if(day.length() < 2) {
+                        if (day.length() < 2) {
                             day = "0" + day;
                         }
                         return date.append(year).append(month).append(day).toString();
@@ -70,7 +70,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 .filter(new Func1<String, Boolean>() {
                     @Override
                     public Boolean call(String s) {
-                        if(s.equals(DateUtil.getTomorrowDate())) {
+                        if (s.equals(DateUtil.getTomorrowDate())) {
                             getDailyData();
                             return false;
                         }
@@ -89,7 +89,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                     @Override
                     public DailyBeforeListBean call(DailyBeforeListBean dailyBeforeListBean) {
                         List<DailyListBean.StoriesBean> list = dailyBeforeListBean.getStories();
-                        for(DailyListBean.StoriesBean item : list) {
+                        for (DailyListBean.StoriesBean item : list) {
                             item.setReadState(mRealmHelper.queryNewsId(item.getId()));
                         }
                         return dailyBeforeListBean;
@@ -98,10 +98,10 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 .subscribe(new CommonSubscriber<DailyBeforeListBean>(mView) {
                     @Override
                     public void onNext(DailyBeforeListBean dailyBeforeListBean) {
-                        int year = Integer.valueOf(dailyBeforeListBean.getDate().substring(0,4));
-                        int month = Integer.valueOf(dailyBeforeListBean.getDate().substring(4,6));
-                        int day = Integer.valueOf(dailyBeforeListBean.getDate().substring(6,8));
-                        mView.showMoreContent(String.format("%d年%d月%d日",year,month,day),dailyBeforeListBean);
+                        int year = Integer.valueOf(dailyBeforeListBean.getDate().substring(0, 4));
+                        int month = Integer.valueOf(dailyBeforeListBean.getDate().substring(4, 6));
+                        int day = Integer.valueOf(dailyBeforeListBean.getDate().substring(6, 8));
+                        mView.showMoreContent(String.format("%d年%d月%d日", year, month, day), dailyBeforeListBean);
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -115,7 +115,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                     @Override
                     public DailyListBean call(DailyListBean dailyListBean) {
                         List<DailyListBean.StoriesBean> list = dailyListBean.getStories();
-                        for(DailyListBean.StoriesBean item : list) {
+                        for (DailyListBean.StoriesBean item : list) {
                             item.setReadState(mRealmHelper.queryNewsId(item.getId()));
                         }
                         return dailyListBean;
@@ -139,7 +139,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                     @Override
                     public DailyBeforeListBean call(DailyBeforeListBean dailyBeforeListBean) {
                         List<DailyListBean.StoriesBean> list = dailyBeforeListBean.getStories();
-                        for(DailyListBean.StoriesBean item : list) {
+                        for (DailyListBean.StoriesBean item : list) {
                             item.setReadState(mRealmHelper.queryNewsId(item.getId()));
                         }
                         return dailyBeforeListBean;
@@ -148,10 +148,10 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 .subscribe(new CommonSubscriber<DailyBeforeListBean>(mView) {
                     @Override
                     public void onNext(DailyBeforeListBean dailyBeforeListBean) {
-                        int year = Integer.valueOf(dailyBeforeListBean.getDate().substring(0,4));
-                        int month = Integer.valueOf(dailyBeforeListBean.getDate().substring(4,6));
-                        int day = Integer.valueOf(dailyBeforeListBean.getDate().substring(6,8));
-                        mView.showMoreContent(String.format("%d年%d月%d日",year,month,day),dailyBeforeListBean);
+                        int year = Integer.valueOf(dailyBeforeListBean.getDate().substring(0, 4));
+                        int month = Integer.valueOf(dailyBeforeListBean.getDate().substring(4, 6));
+                        int day = Integer.valueOf(dailyBeforeListBean.getDate().substring(6, 8));
+                        mView.showMoreContent(String.format("%d年%d月%d日", year, month, day), dailyBeforeListBean);
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -164,7 +164,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 .subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {
-                        if(currentTopCount == topCount)
+                        if (currentTopCount == topCount)
                             currentTopCount = 0;
                         mView.doInterval(currentTopCount++);
                     }

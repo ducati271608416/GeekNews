@@ -10,14 +10,14 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 
 public interface MainContract {
 
-    interface View extends BaseView{
+    interface View extends BaseView {
 
         void showUpdateDialog(String versionContent);
 
         void startDownloadService();
     }
 
-    interface  Presenter extends BasePresenter<View> {
+    interface Presenter extends BasePresenter<View> {
 
         void checkVersion(String currentVersion);
 

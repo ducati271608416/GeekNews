@@ -53,5 +53,6 @@ public abstract class SimpleActivity extends SupportActivity {
     }
 
     protected abstract int getLayout();
+
     protected abstract void initEventAndData();
 }

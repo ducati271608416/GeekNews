@@ -15,6 +15,7 @@ import com.codeest.geeknews.model.http.api.VtexApis;
 import com.codeest.geeknews.model.http.api.WeChatApis;
 import com.codeest.geeknews.model.http.api.ZhihuApis;
 import com.codeest.geeknews.util.SystemUtil;
+import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.IOException;
@@ -111,16 +112,23 @@ public class HttpModule {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!SystemUtil.isNetworkConnected()) {
+                KLog.e(request.toString());
+                if (SystemUtil.isNetworkConnected()) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
+                    KLog.e(request.toString());
                 }
+                //------------以下代码对Response的操作将在NetworkInterceptor执行后被保存（猜测）----------
                 Response response = chain.proceed(request);
                 if (SystemUtil.isNetworkConnected()) {
+                    KLog.e(response.toString());
                     int maxAge = 0;
                     // 有网络时, 不缓存, 最大保存时长为0
                     response.newBuilder()
+                            //Cache-control:用于控制HTTP缓存
+                            //public:所有内容都将被缓存(客户端和代理服务器都可缓存)
+                            //max-age:指示客户机可以接收生存期不大于指定时间（以秒为单位）的响应。在maxAge秒内再次请求该地址则不会请求服务器，直接获取缓存内容。
                             .header("Cache-Control", "public, max-age=" + maxAge)
                             .removeHeader("Pragma")
                             .build();
@@ -128,6 +136,8 @@ public class HttpModule {
                     // 无网络时，设置超时为4周
                     int maxStale = 60 * 60 * 24 * 28;
                     response.newBuilder()
+                            //max-stale:客户端愿意接收一个已经超过其过期时间的响应(但不超过maxStale秒)
+                            //only-if-cached:在某些情况下，如网络连接非常差时，客户端可能需要一个缓存，只返回目前已存储的那些响应，而不是重新加载，或与源服务器重新验证。
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")
                             .build();
